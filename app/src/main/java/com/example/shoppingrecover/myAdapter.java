@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ class myAdapter extends Adapter<myAdapter.myViewHolder> {
 
     ArrayList<String> data;
     Context context;
+    ImageView check;
 
     public myAdapter(Context ct,  ArrayList<String> data)
     {

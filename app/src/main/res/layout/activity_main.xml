@@ -9,26 +9,27 @@
     android:background="#200f">
 
     <RelativeLayout
-        android:layout_width = "match_parent"
         android:id="@+id/header"
-        android:layout_height="100dp"
-        android:gravity="center">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginBottom="15dp">
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="הוסף"
-            android:textSize="24sp"
-            />
+            android:textSize="24sp" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
         android:id="@+id/recyclerview"
-        android:layout_below = "@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
 
         />
 </RelativeLayout>

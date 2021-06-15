@@ -15,7 +15,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 public class AddItem extends AppCompatActivity {
-    ArrayList<String> items = new ArrayList<String>();
+    String item;
     Button add;
     EditText itemText;
     @Override
@@ -26,14 +26,6 @@ public class AddItem extends AppCompatActivity {
         add= findViewById(R.id.AddButton);
         itemText = findViewById(R.id.ItemText);
 
-
-        //Get The List From Main
-
-        Intent intent = getIntent();
-        if (intent.getStringArrayListExtra("List") != null) {
-            items = intent.getStringArrayListExtra("List");
-        }
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,12 +35,20 @@ public class AddItem extends AppCompatActivity {
                 editor.putString("name", items.toString());
                 editor.apply();
 */
-                Toast.makeText(AddItem.this, "הפריט נוסף לרשימה",
-                        Toast.LENGTH_LONG).show();
 
-                Intent myIntent = new Intent(AddItem.this, MainActivity.class);
-                myIntent.putExtra("List", items); //Optional parameters
-                AddItem.this.startActivity(myIntent);
+                item = itemText.getText().toString();
+                if(!item.isEmpty()) {
+                    Toast.makeText(AddItem.this, item,
+                            Toast.LENGTH_LONG).show();
+
+                    Intent myIntent = new Intent(AddItem.this, MainActivity.class);
+                    myIntent.putExtra("Item", item);
+                    AddItem.this.startActivity(myIntent);
+                }
+                else {
+                    Toast.makeText(AddItem.this, "לא הוכנס שם פריט",
+                            Toast.LENGTH_LONG).show();
+                }
 
             }
         });

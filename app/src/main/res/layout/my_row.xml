@@ -50,7 +50,8 @@
                 app:layout_constraintHorizontal_bias="0.881"
                 app:layout_constraintStart_toEndOf="@+id/info"
                 app:srcCompat="@android:drawable/checkbox_off_background"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                android:clickable="true"/>
 
             <ImageView
                 android:id="@+id/info"
