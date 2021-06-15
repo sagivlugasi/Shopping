@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements myAdapter.OnCheckListener {
 
     RecyclerView recyclerView;
+    myAdapter adapter;
     public ArrayList<String> items = new ArrayList<String>();
     Button add;
 
@@ -56,9 +57,27 @@ public class MainActivity extends AppCompatActivity {
 
         if (!items.isEmpty()) {
             recyclerView = findViewById(R.id.recyclerview);
-            myAdapter adapter = new myAdapter(this, items);
+            adapter = new myAdapter(this, items);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+           adapter.setOnItemClickListener(new myAdapter.OnItemClickListener() {
+            @Override
+             public void onItemClick(int position) {
+
+            Toast.makeText(MainActivity.this, items.get(position),
+                        Toast.LENGTH_SHORT).show();
+              }
+
+               @Override
+               public void onChecklClick(int position) {
+                   Toast.makeText(MainActivity.this, "check!",
+                           Toast.LENGTH_SHORT).show();
+
+               }
+
+           });
+
         }
 
         add = findViewById(R.id.button);
@@ -69,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
 
             }
+
         });
 
     }
@@ -94,8 +114,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void OnCheckClick(int position) {
+       //items.get(position);
+        Toast.makeText(MainActivity.this, "Clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+    public void RemoveItem(int position)
+    {
+        items.remove(position);
+        adapter.notifyItemRemoved(position);
 
-
-
+    }
 
 }

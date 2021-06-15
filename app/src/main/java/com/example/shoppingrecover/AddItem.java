@@ -39,7 +39,7 @@ public class AddItem extends AppCompatActivity {
                 item = itemText.getText().toString();
                 if(!item.isEmpty()) {
                     Toast.makeText(AddItem.this, item,
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
 
                     Intent myIntent = new Intent(AddItem.this, MainActivity.class);
                     myIntent.putExtra("Item", item);

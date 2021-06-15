@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#200f">
+    android:background="#3399ff">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -30,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/header"
-
         />
 </RelativeLayout>
 
