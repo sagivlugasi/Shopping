@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
+import org.w3c.dom.CDATASection;
+
 import java.util.ArrayList;
 
 class myAdapter extends Adapter<myAdapter.myViewHolder> {
@@ -62,9 +64,11 @@ class myAdapter extends Adapter<myAdapter.myViewHolder> {
             check.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     if( listener != null)
                     {
                         int position = getAdapterPosition();
+
                         if (position != RecyclerView.NO_POSITION)
                         {
                             listener.onChecklClick( position);
@@ -92,20 +96,12 @@ class myAdapter extends Adapter<myAdapter.myViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-
         holder.item.setText(data.get(position));
-
-
     }
 
     @Override
     public int getItemCount() {
         return data.size();
-    }
-
-
-    public interface OnCheckListener{
-        void OnCheckClick(int position);
     }
 
 }

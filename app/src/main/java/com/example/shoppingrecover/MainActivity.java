@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MainActivity extends AppCompatActivity implements myAdapter.OnCheckListener {
+public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     myAdapter adapter;
@@ -27,13 +27,12 @@ public class MainActivity extends AppCompatActivity implements myAdapter.OnCheck
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       ReadList();
-
+        //initialize the list from the device data
+        ReadList();
 
         //Add new item from AddItem Activity
         String NewItemString;
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null ) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 NewItemString= null;
@@ -50,11 +49,12 @@ public class MainActivity extends AppCompatActivity implements myAdapter.OnCheck
                 items.add(NewItemString);
             }
         }
-        SaveList();
         //--------------------------------------------------------------
 
+        //save the list into the device
+        SaveList(items);
 
-
+        //if the list is not empty, show the recyclerView
         if (!items.isEmpty()) {
             recyclerView = findViewById(R.id.recyclerview);
             adapter = new myAdapter(this, items);
@@ -73,11 +73,9 @@ public class MainActivity extends AppCompatActivity implements myAdapter.OnCheck
                public void onChecklClick(int position) {
                    Toast.makeText(MainActivity.this, "check!",
                            Toast.LENGTH_SHORT).show();
-
+                   RemoveItem(position);
                }
-
            });
-
         }
 
         add = findViewById(R.id.button);
@@ -86,18 +84,15 @@ public class MainActivity extends AppCompatActivity implements myAdapter.OnCheck
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, AddItem.class);
                 MainActivity.this.startActivity(myIntent);
-
             }
-
         });
-
     }
 
-    public void SaveList()
+    public void SaveList(ArrayList<String>listToSave)
     {
         SharedPreferences.Editor editor = getSharedPreferences("ShoppingList", MODE_PRIVATE).edit();
         Set<String> set = new HashSet<String>();
-        set.addAll(items);
+        set.addAll(listToSave);
         editor.putStringSet("MyList", set);
         editor.commit();
     }
@@ -110,21 +105,14 @@ public class MainActivity extends AppCompatActivity implements myAdapter.OnCheck
         if(prefs != null) {
             items.addAll(prefs.getStringSet("MyList", defaultSet));
         }
-
-
     }
 
-    @Override
-    public void OnCheckClick(int position) {
-       //items.get(position);
-        Toast.makeText(MainActivity.this, "Clicked",
-                Toast.LENGTH_SHORT).show();
-    }
+
     public void RemoveItem(int position)
     {
         items.remove(position);
         adapter.notifyItemRemoved(position);
-
+        SaveList(items);
     }
 
 }
